@@ -10,7 +10,7 @@ class UsersController < ApplicationController
   end
 
   def new
-    if signed_in?
+    if !signed_in? || !current_user.admin?
       redirect_to root_path
     else
   	  @user = User.new
@@ -20,9 +20,9 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     if @user.save
-      sign_in @user
-   	  flash[:success] = "Welcome to the Sample App!"
-      redirect_to @user
+      #sign_in @user
+   	  flash[:success] = "User Added!"
+      redirect_to current_user
     else
       render 'new'
     end
