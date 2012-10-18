@@ -1,6 +1,7 @@
 <% provide(:title, "Sign in") %>
 <h1>Sign in</h1>
 
+<!--
 <div class="row">
   <div class="span6 offset3">
     <%= form_for(:session, url: sessions_path) do |f| %>
@@ -16,14 +17,17 @@
 
     <!-- <p>New user? <%= link_to "Sign up now!", signup_path %></p> -->
   </div>
-</div>
-<!--
-=======
+</div> 
+-->
+
 <% if signed_in? %>
   <div class="row">
     <aside class="span4">
       <section>
         <%= render 'shared/user_info' %>
+      </section>      
+      <section>
+        <%= render 'shared/stats' %>
       </section>
       <section>
         <%= render 'shared/micropost_form' %>
@@ -50,4 +54,4 @@
 
   <%= link_to image_tag("rails.png", alt: "Rails"), 'http://rubyonrails.org/' %>
 <% end %> 
->>>>>>> user-microposts -->
+
