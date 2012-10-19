@@ -7,11 +7,17 @@
 <!--      <%= render 'fields', f: f %> -->
       <%= render 'shared/error_messages', object: f.object %>
 
-      <%= f.label :name %>
-      <%= f.text_field :name,:readonly => true %>
-
-      <%= f.label :email %>
-      <%= f.text_field :email,:readonly => true %>
+      <% if current_user.admin? %>
+        <%= f.label :name %>
+        <%= f.text_field :name %>
+        <%= f.label :email %>
+        <%= f.text_field :email %>
+      <% else %>
+        <%= f.label :name %>
+        <%= f.text_field :name,:readonly => true %>
+        <%= f.label :email %>
+        <%= f.text_field :email,:readonly => true %>
+      <% end %>
 
       <%= f.label :password %>
       <%= f.password_field :password %>
@@ -19,7 +25,21 @@
       <%= f.label :password_confirmation, "Confirm Password" %>
       <%= f.password_field :password_confirmation %>
 
+      <% if current_user.admin? %>
+
+        <!--<%= check_box_tag :admin %>  -->
+        <%= f.check_box :admin %>
+        <%= f.label :admin, "Adminstrator", :style => "display:inline"  %>
+
+
+        <!-- <%= check_box_tag :manager %> -->
+        <%= f.check_box :manager %>
+        <%= f.label :manager, "Project Manager", :style => "display:inline"   %>
+        <br>
+      <% end %>
+      
       <%= f.submit "Save changes", class: "btn btn-large btn-primary" %>
+
     <% end %>
 
     <%= gravatar_for @user %>
